@@ -1,0 +1,15 @@
+<mat-menu #childMenu="matMenu" [overlapTrigger]="false">
+  <ng-container *ngFor="let child of items">
+    <ng-container *ngIf="child.children && child.children.length > 0">
+      <div mat-menu-item color="primary" [matMenuTriggerFor]="menu.childMenu">
+        {{ child.name }}
+      </div>
+      <app-nested-menu
+        #menu
+        [items]="child.children"></app-nested-menu>
+    </ng-container>
+    <ng-container *ngIf="!child.children || child.children.length === 0">
+      <button mat-menu-item>{{child.name}}</button>
+    </ng-container>
+  </ng-container>
+</mat-menu>
